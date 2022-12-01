@@ -15,24 +15,22 @@ const RulesPopup = () => (
       className="popup-content"
     >
       {close => (
-        <div>
-          <div className="video-sett">
-            <div className="video">
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rules-image.png"
-                alt="rules"
-                className="thumbnail-image"
-              />
-            </div>
-            <button
-              type="button"
-              onClick={() => close()}
-              className="close-button"
-              data-testid="closeButton"
-            >
-              <RiCloseLine className="close-icon" />
-            </button>
+        <div className="video-sett">
+          <div className="video">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rules-image.png"
+              alt="rules"
+              className="thumbnail-image"
+            />
           </div>
+          <button
+            type="button"
+            onClick={() => close()}
+            className="close-button"
+            data-testid="closeButton"
+          >
+            <RiCloseLine className="close-icon" />
+          </button>
         </div>
       )}
     </Popup>
