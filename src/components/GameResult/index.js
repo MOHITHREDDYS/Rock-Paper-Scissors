@@ -8,41 +8,13 @@ import {
 import {Image} from '../GameChoices/styledComponents'
 
 const GameResult = props => {
-  const {yourChoice, opponentChoice, choicesList, playAgain} = props
+  const {yourChoice, opponentChoice, choicesList, playAgain, result} = props
 
   const you = choicesList.filter(choice => choice.id === yourChoice)
   const opponent = choicesList.filter(choice => choice.id === opponentChoice)
 
   const onClickingPlayAgain = () => {
     playAgain()
-  }
-
-  let winOrLose = ''
-
-  if (you[0].id === 'ROCK') {
-    if (opponent[0].id === 'SCISSORS') {
-      winOrLose = 'YOU WIN'
-    } else if (opponent[0].id === 'PAPER') {
-      winOrLose = 'YOU LOSE'
-    } else {
-      winOrLose = 'IT IS DRAW'
-    }
-  } else if (you[0].id === 'PAPER') {
-    if (opponent[0].id === 'SCISSORS') {
-      winOrLose = 'YOU LOSE'
-    } else if (opponent[0].id === 'ROCK') {
-      winOrLose = 'YOU WON'
-    } else {
-      winOrLose = 'IT IS DRAW'
-    }
-  } else if (you[0].id === 'SCISSORS') {
-    if (opponent[0].id === 'PAPER') {
-      winOrLose = 'YOU WIN'
-    } else if (opponent[0].id === 'ROCK') {
-      winOrLose = 'YOU LOSE'
-    } else {
-      winOrLose = 'IT IS DRAW'
-    }
   }
 
   return (
@@ -57,7 +29,7 @@ const GameResult = props => {
           <Image src={opponent[0].imageUrl} alt="opponent choice" />
         </ImageContainer>
       </ImagesContainer>
-      <Heading>{winOrLose}</Heading>
+      <Heading>{result}</Heading>
       <Button type="button" onClick={onClickingPlayAgain}>
         Play Again
       </Button>

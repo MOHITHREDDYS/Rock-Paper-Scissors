@@ -36,9 +36,10 @@ export const ScoreContainer = styled.div`
   padding: 10px 20px;
 `
 
-export const Score = styled.h1`
+export const Score = styled.p`
   color: #223a5f;
   margin: 0px;
+  font-weight: bold;
   text-align: center;
   font-size: ${props => (props.number ? 50 : 20)}px;
   font-family: ${props => (props.number ? 'Roboto' : 'Bree Serif')};

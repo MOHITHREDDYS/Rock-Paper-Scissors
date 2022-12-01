@@ -20,9 +20,10 @@ export const Player = styled.h1`
   font-size: 25px;
   font-family: 'Roboto';
 `
-export const Heading = styled.h1`
+export const Heading = styled.p`
   color: #ffffff;
   font-size: 40px;
+  font-weight: bold;
   font-family: 'Roboto';
 `
 export const Button = styled.button`

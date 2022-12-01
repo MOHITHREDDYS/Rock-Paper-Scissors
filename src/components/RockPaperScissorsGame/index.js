@@ -11,27 +11,36 @@ import {
 
 import GameChoices from '../GameChoices'
 import GameResult from '../GameResult'
+import RulesPopup from '../RulesPopup'
 
 class RockPaperScissorsGame extends Component {
-  state = {score: 0, yourChoice: '', opponentChoice: '', isGameEnded: false}
+  state = {
+    score: 0,
+    yourChoice: '',
+    opponentChoice: '',
+    isGameEnded: false,
+    result: '',
+  }
 
   checkResult = yourChoice => {
+    console.log(yourChoice)
+    const {score} = this.state
     const {choicesList} = this.props
     const opponentChoice =
       choicesList[Math.floor(Math.random() * choicesList.length)].id
-    this.setState({yourChoice, opponentChoice, isGameEnded: true})
-    this.changeScore()
-  }
-
-  changeScore = () => {
-    const {choicesList, yourChoice, opponentChoice} = this.props
+    console.log(opponentChoice)
+    this.setState({
+      yourChoice,
+      opponentChoice,
+      isGameEnded: true,
+    })
     const you = choicesList.filter(choice => choice.id === yourChoice)
     const opponent = choicesList.filter(choice => choice.id === opponentChoice)
     let winOrLose = ''
 
     if (you[0].id === 'ROCK') {
       if (opponent[0].id === 'SCISSORS') {
-        winOrLose = 'YOU WIN'
+        winOrLose = 'YOU WON'
       } else if (opponent[0].id === 'PAPER') {
         winOrLose = 'YOU LOSE'
       } else {
@@ -47,7 +56,7 @@ class RockPaperScissorsGame extends Component {
       }
     } else if (you[0].id === 'SCISSORS') {
       if (opponent[0].id === 'PAPER') {
-        winOrLose = 'YOU WIN'
+        winOrLose = 'YOU WON'
       } else if (opponent[0].id === 'ROCK') {
         winOrLose = 'YOU LOSE'
       } else {
@@ -55,15 +64,31 @@ class RockPaperScissorsGame extends Component {
       }
     }
 
-    winOrLose === "YOU LOSE" ? (winOrLose !== "IT IS DRAW" ? this.setState({score : score - 1, result : "YOU LOSE"}) : this.setState({score : score - 0}))
+    /* return winOrLose === 'YOU LOSE'
+      ? this.setState({score: score - 1, result: 'YOU LOSE'})
+      : this.setState({score: score + 1, result: 'YOU WON'}) */
+
+    if (winOrLose === 'YOU WON') {
+      this.setState({score: score + 1, result: 'YOU WON'})
+    } else if (winOrLose === 'YOU LOSE') {
+      this.setState({score: score - 1, result: 'YOU LOSE'})
+    } else {
+      this.setState({result: 'IT IS DRAW'})
+    }
   }
 
+  /*  changeScore = () => {
+    const {choicesList} = this.props
+    const {yourChoice, opponentChoice, score} = this.state
+    console.log(yourChoice, opponentChoice)
+  }
+ */
   playAgain = () => {
     this.setState({isGameEnded: false})
   }
 
   render() {
-    const {score, isGameEnded, yourChoice, opponentChoice} = this.state
+    const {score, isGameEnded, yourChoice, opponentChoice, result} = this.state
     const {choicesList} = this.props
     return (
       <MainContainer>
@@ -94,8 +119,10 @@ class RockPaperScissorsGame extends Component {
               opponentChoice={opponentChoice}
               choicesList={choicesList}
               playAgain={this.playAgain}
+              result={result}
             />
           )}
+          <RulesPopup />
         </Container>
       </MainContainer>
     )
